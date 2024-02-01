@@ -6,7 +6,7 @@
 /*   By: dflugel <dflugel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 13:45:44 by madwingg          #+#    #+#             */
-/*   Updated: 2024/01/28 02:15:56 by dflugel          ###   ########.fr       */
+/*   Updated: 2024/01/30 16:32:53 by dflugel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 #include "libft/libft.h"
 
 // Prototypes
+
+size_t	ft_strlen(char const *s);
+
+void	ft_putchar_fd(char c, int fd);
+
+void	ft_putstr_fd(char *s, int fd);
+
+void	ft_putnbr_fd(int n, int fd);
 
 int		ft_printf(const char *str, ...);
 
