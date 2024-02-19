@@ -6,15 +6,16 @@
 /*   By: dflugel <dflugel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 13:45:46 by madwingg          #+#    #+#             */
-/*   Updated: 2024/01/28 02:15:07 by dflugel          ###   ########.fr       */
+/*   Updated: 2024/02/19 22:57:32 by dflugel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_printf(const char *str, ...);
-int	ft_printf_callargs(va_list arg, char spec_flag);
-int	ft_print_text(const char *text);
+int		ft_printf(const char *str, ...);
+int		ft_printf_callargs(va_list arg, char spec_flag);
+int		ft_print_text(const char *text);
+void	ft_putchar_fd(char c, int fd);
 
 int	ft_printf(const char *str, ...)
 {
@@ -70,4 +71,9 @@ int	ft_print_text(const char *text)
 		i++;
 	}
 	return (i);
+}
+
+void	ft_putchar_fd(char c, int fd)
+{
+	write(fd, &c, 1);
 }

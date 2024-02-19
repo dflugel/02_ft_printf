@@ -7,9 +7,6 @@ MANDO =	ft_printf.c \
 		ft_print_ptr.c
 		
 # Libraries
-LIBs = ./libft/libft.a
-
-INCDIRS =-I./libft
 
 # Rules:
 NAME = libftprintf.a
@@ -20,29 +17,23 @@ CFLAGS = -Wall -Wextra -Werror $(INCDIRS)
 
 MANDOOBJ	= $(MANDO:.c=.o)
 
-all: libft_compile $(NAME)
-
-libft_compile:
-	$(MAKE) -C libft all
+all: $(NAME)
 
 $(NAME): $(MANDOOBJ)
-	ar -rcs $@ $(LIBs) $^
+	ar -rcs $@ $^
 
 %.o:%.c
 	$(CC) -c $(CFLAGS) $^ -o $@
 
-#test: $(LIBFT) testcompile
+test: testcompile
 
-#testcompile: test.c
-#	$(CC) $(CFLAGS) -o test.o test.c $(MANDO) $(LIBs)
+testcompile: test.c
+	$(CC) $(CFLAGS) -o test.o test.c $(MANDO)
 
 clean:
 	rm -f $(MANDOOBJ)
 
-libftclean:
-	$(MAKE) -C libft fclean
-
-fclean: clean libftclean
+fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
