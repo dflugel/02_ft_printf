@@ -6,7 +6,7 @@
 /*   By: dflugel <dflugel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 13:45:46 by madwingg          #+#    #+#             */
-/*   Updated: 2024/02/19 22:57:32 by dflugel          ###   ########.fr       */
+/*   Updated: 2024/02/20 00:42:45 by dflugel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 int		ft_printf(const char *str, ...);
 int		ft_printf_callargs(va_list arg, char spec_flag);
 int		ft_print_text(const char *text);
-void	ft_putchar_fd(char c, int fd);
 
 int	ft_printf(const char *str, ...)
 {
 	va_list	args;
 	int		len;
+	int		returnvalue;
 
 	va_start(args, str);
 	len = 0;
@@ -29,9 +29,13 @@ int	ft_printf(const char *str, ...)
 	while (*(str + len) != '\0')
 	{
 		if (*(str + len) == '%')
-			len += ft_printf_callargs(args, *(str + len + 1));
+			returnvalue = ft_printf_callargs(args, *(str + len + 1));
 		else
 			len += ft_print_text((str + len));
+		if (returnvalue == 0)
+			break ;
+		else
+			len += returnvalue;
 	}
 	va_end(args);
 	return (len);
@@ -71,9 +75,4 @@ int	ft_print_text(const char *text)
 		i++;
 	}
 	return (i);
-}
-
-void	ft_putchar_fd(char c, int fd)
-{
-	write(fd, &c, 1);
 }

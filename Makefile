@@ -1,39 +1,36 @@
-# Files:
+NAME 		= 	libftprintf.a
 
-MANDO =	ft_printf.c \
-		ft_print_nbrs.c \
-		ft_print_hex.c \
-		ft_print_chrs.c \
-		ft_print_ptr.c
-		
-# Libraries
+RM 			= 	rm -f
+CC 			= 	cc
+CFLAGS 		= 	-Wall -Wextra -Werror
+AR			= 	ar
+ARFLAGS 	= 	-rcs
+INCFLAG		= 	-I .
 
-# Rules:
-NAME = libftprintf.a
 
-CC = cc
-
-CFLAGS = -Wall -Wextra -Werror $(INCDIRS)
+MANDO		= 	ft_printf.c \
+				ft_print_nbrs.c \
+				ft_print_hex.c \
+				ft_print_chrs.c \
+				ft_print_ptr.c
 
 MANDOOBJ	= $(MANDO:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(MANDOOBJ)
-	ar -rcs $@ $^
+	make -C libft
+	cp libft/libft.a .
+	mv libft.a $(NAME)
+	@$(AR) $(ARFLAGS) $@ $^
 
-%.o:%.c
-	$(CC) -c $(CFLAGS) $^ -o $@
-
-test: testcompile
-
-testcompile: test.c
-	$(CC) $(CFLAGS) -o test.o test.c $(MANDO)
+%.o : %.c
+	@$(CC) -c $(CFLAGS) $(INCFLAG) $< -o $@
 
 clean:
-	rm -f $(MANDOOBJ)
+	- @$(RM) $(MANDOOBJ)
 
 fclean: clean
-	rm -f $(NAME)
+	- @$(RM) ${NAME}
 
 re: fclean all
