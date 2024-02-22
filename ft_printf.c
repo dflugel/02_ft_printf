@@ -6,7 +6,7 @@
 /*   By: dflugel <dflugel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 13:45:46 by madwingg          #+#    #+#             */
-/*   Updated: 2024/02/20 00:42:45 by dflugel          ###   ########.fr       */
+/*   Updated: 2024/02/22 01:37:02 by dflugel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,25 +20,25 @@ int	ft_printf(const char *str, ...)
 {
 	va_list	args;
 	int		len;
-	int		returnvalue;
+	int		i;
 
 	va_start(args, str);
 	len = 0;
+	i = 0;
 	if (!str)
 		return (-1);
 	while (*(str + len) != '\0')
 	{
 		if (*(str + len) == '%')
-			returnvalue = ft_printf_callargs(args, *(str + len + 1));
+		{
+			len += ft_printf_callargs(args, *(str + len + 1));
+			i++;
+		}
 		else
 			len += ft_print_text((str + len));
-		if (returnvalue == 0)
-			break ;
-		else
-			len += returnvalue;
 	}
 	va_end(args);
-	return (len);
+	return (len - i);
 }
 
 int	ft_printf_callargs(va_list arg, char spec_flag)
@@ -59,8 +59,6 @@ int	ft_printf_callargs(va_list arg, char spec_flag)
 		ft_print_hex_big(va_arg(arg, long));
 	else if (spec_flag == '%')
 		ft_print_char('%');
-	else
-		return (0);
 	return (2);
 }
 

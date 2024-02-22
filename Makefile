@@ -1,36 +1,48 @@
-NAME 		= 	libftprintf.a
+# Files:
 
-RM 			= 	rm -f
-CC 			= 	cc
-CFLAGS 		= 	-Wall -Wextra -Werror
-AR			= 	ar
-ARFLAGS 	= 	-rcs
-INCFLAG		= 	-I .
+MANDO =	ft_printf.c \
+		ft_print_nbrs.c \
+		ft_print_hex.c \
+		ft_print_chrs.c \
+		ft_print_ptr.c
+		
+# Libraries
+LIBs = ./libft/libft.a
 
+INCDIRS =-I./libft
 
-MANDO		= 	ft_printf.c \
-				ft_print_nbrs.c \
-				ft_print_hex.c \
-				ft_print_chrs.c \
-				ft_print_ptr.c
+# Rules:
+NAME = libftprintf.a
+
+CC = cc
+
+CFLAGS = -Wall -Wextra -Werror $(INCDIRS)
 
 MANDOOBJ	= $(MANDO:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(MANDOOBJ)
-	make -C libft
+	$(MAKE) -C libft all
 	cp libft/libft.a .
 	mv libft.a $(NAME)
-	@$(AR) $(ARFLAGS) $@ $^
+	ar -rcs $@ $^
 
-%.o : %.c
-	@$(CC) -c $(CFLAGS) $(INCFLAG) $< -o $@
+%.o:%.c
+	$(CC) -c $(CFLAGS) $(INCDIRS) $^ -o $@
+
+test: $(LIBFT) testcompile
+
+testcompile: test.c
+	$(CC) $(CFLAGS) -o test.o test.c $(MANDO) $(LIBs)
 
 clean:
-	- @$(RM) $(MANDOOBJ)
+	rm -f $(MANDOOBJ)
 
-fclean: clean
-	- @$(RM) ${NAME}
+libftclean:
+	$(MAKE) -C libft fclean
+
+fclean: clean libftclean
+	rm -f $(NAME)
 
 re: fclean all
