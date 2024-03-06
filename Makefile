@@ -5,11 +5,8 @@ MANDO =	ft_printf.c \
 		ft_print_hex.c \
 		ft_print_chrs.c \
 		ft_print_ptr.c
-		
-# Libraries
-LIBs = ./libft/libft.a
 
-INCDIRS =-I./libft
+INCDIRS =-I.
 
 # Rules:
 NAME = libftprintf.a
@@ -29,12 +26,13 @@ $(NAME): $(MANDOOBJ)
 	ar -rcs $@ $^
 
 %.o:%.c
-	$(CC) -c $(CFLAGS) $(INCDIRS) $^ -o $@
+	$(CC) -c $(CFLAGS) $^ -o $@
 
-test: $(LIBFT) testcompile
+#testcompile: test.c
+#	$(CC) $(CFLAGS) -o test.o test.c $(NAME)
 
-testcompile: test.c
-	$(CC) $(CFLAGS) -o test.o test.c $(MANDO) $(LIBs)
+test: $(NAME) #testcompile
+	$(CC) $(CFLAGS) -o test.o test.c $(NAME)
 
 clean:
 	rm -f $(MANDOOBJ)

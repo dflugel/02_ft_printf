@@ -6,19 +6,28 @@
 /*   By: dflugel <dflugel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 13:45:57 by madwingg          #+#    #+#             */
-/*   Updated: 2024/01/28 02:18:25 by dflugel          ###   ########.fr       */
+/*   Updated: 2024/03/06 10:20:39 by dflugel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_print_ptr(long long ptr);
+int		ft_print_ptr(long long ptr);
 void	ft_put_ptr(long long ptr);
 
-void	ft_print_ptr(long long ptr)
+int	ft_print_ptr(long long ptr)
 {
+	int	printlen;
+
 	write(1, "0x", 2);
 	ft_put_ptr(ptr);
+	printlen = 2;
+	while (ptr != 0)
+	{
+		ptr /= 16;
+		printlen++;
+	}
+	return (printlen);
 }
 
 void	ft_put_ptr(long long ptr)

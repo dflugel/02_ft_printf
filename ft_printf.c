@@ -6,7 +6,7 @@
 /*   By: dflugel <dflugel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 13:45:46 by madwingg          #+#    #+#             */
-/*   Updated: 2024/02/22 01:37:02 by dflugel          ###   ########.fr       */
+/*   Updated: 2024/03/06 10:19:13 by dflugel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,63 +14,53 @@
 
 int		ft_printf(const char *str, ...);
 int		ft_printf_callargs(va_list arg, char spec_flag);
-int		ft_print_text(const char *text);
 
 int	ft_printf(const char *str, ...)
 {
 	va_list	args;
-	int		len;
-	int		i;
+	int		readlen;
+	int		printlen;
 
 	va_start(args, str);
-	len = 0;
-	i = 0;
+	readlen = 0;
+	printlen = 0;
 	if (!str)
 		return (-1);
-	while (*(str + len) != '\0')
+	while (*(str + readlen) != '\0')
 	{
-		if (*(str + len) == '%')
+		if (*(str + readlen) == '%')
 		{
-			len += ft_printf_callargs(args, *(str + len + 1));
-			i++;
+			printlen += ft_printf_callargs(args, *(str + readlen + 1));
+			readlen += 2;
 		}
 		else
-			len += ft_print_text((str + len));
+		{
+			ft_putchar_fd(*(str + readlen), 1);
+			printlen++;
+			readlen++;
+		}
 	}
 	va_end(args);
-	return (len - i);
+	return (printlen);
 }
 
 int	ft_printf_callargs(va_list arg, char spec_flag)
 {
 	if (spec_flag == 'c')
-		ft_print_char(va_arg(arg, int));
+		return (ft_print_char(va_arg(arg, int)));
 	else if (spec_flag == 's')
-		ft_print_str(va_arg(arg, char *));
+		return (ft_print_str(va_arg(arg, char *)));
 	else if (spec_flag == 'p')
-		ft_print_ptr(va_arg(arg, long long));
+		return (ft_print_ptr(va_arg(arg, long long)));
 	else if (spec_flag == 'd' || spec_flag == 'i')
-		ft_print_nbrs(va_arg(arg, long));
+		return (ft_print_nbrs(va_arg(arg, long)));
 	else if (spec_flag == 'u')
-		ft_print_nbrs(va_arg(arg, unsigned int));
+		return (ft_print_nbrs(va_arg(arg, unsigned int)));
 	else if (spec_flag == 'x')
-		ft_print_hex_small(va_arg(arg, long));
+		return (ft_print_hex_small(va_arg(arg, long)));
 	else if (spec_flag == 'X')
-		ft_print_hex_big(va_arg(arg, long));
+		return (ft_print_hex_big(va_arg(arg, long)));
 	else if (spec_flag == '%')
-		ft_print_char('%');
+		return (ft_print_char('%'));
 	return (2);
-}
-
-int	ft_print_text(const char *text)
-{
-	size_t	i;
-
-	i = 0;
-	while (*(text + i) != '%' && *(text + i) != '\0')
-	{
-		ft_putchar_fd(*(text + i), 1);
-		i++;
-	}
-	return (i);
 }
