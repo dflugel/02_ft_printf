@@ -6,7 +6,7 @@
 /*   By: dflugel <dflugel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 13:45:54 by madwingg          #+#    #+#             */
-/*   Updated: 2024/02/28 15:11:20 by dflugel          ###   ########.fr       */
+/*   Updated: 2024/03/08 08:03:02 by dflugel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	ft_print_nbrs(long nbr)
 
 	ft_putnbr_fd(nbr, 1);
 	printlen = 0;
+	if (nbr == 0)
+		return (1);
 	while (nbr != 0)
 	{
 		nbr /= 10;

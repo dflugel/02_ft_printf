@@ -6,7 +6,7 @@
 /*   By: dflugel <dflugel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 13:45:46 by madwingg          #+#    #+#             */
-/*   Updated: 2024/03/06 10:19:13 by dflugel          ###   ########.fr       */
+/*   Updated: 2024/03/14 18:45:19 by dflugel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,5 @@ int	ft_printf_callargs(va_list arg, char spec_flag)
 		return (ft_print_hex_big(va_arg(arg, long)));
 	else if (spec_flag == '%')
 		return (ft_print_char('%'));
-	return (2);
+	return (0);
 }

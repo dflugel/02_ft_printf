@@ -6,7 +6,7 @@
 /*   By: dflugel <dflugel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 13:45:49 by madwingg          #+#    #+#             */
-/*   Updated: 2024/03/06 10:20:01 by dflugel          ###   ########.fr       */
+/*   Updated: 2024/03/14 18:37:35 by dflugel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ int	ft_print_char(int c)
 
 int	ft_print_str(char *str)
 {
+	if (!str)
+	{
+		write(1, "(null)", 6);
+		return (6);
+	}
 	ft_putstr_fd(str, 1);
 	return (ft_strlen(str));
 }
