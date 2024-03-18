@@ -6,19 +6,19 @@
 /*   By: dflugel <dflugel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 13:45:51 by madwingg          #+#    #+#             */
-/*   Updated: 2024/03/08 08:03:08 by dflugel          ###   ########.fr       */
+/*   Updated: 2024/03/18 23:29:17 by dflugel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_print_hex_small(long long hex);
-int		ft_print_hex_big(long long hex);
-int		calc_hex_printlen(long long hex);
-void	put_hex_small(long long hex);
-void	put_hex_big(long long hex);
+int		ft_print_hex_small(unsigned int hex);
+int		ft_print_hex_big(unsigned int hex);
+int		calc_hex_printlen(unsigned int hex);
+void	put_hex_small(unsigned int hex);
+void	put_hex_big(unsigned int hex);
 
-int	ft_print_hex_small(long long hex)
+int	ft_print_hex_small(unsigned int hex)
 {
 	int	printlen;
 
@@ -28,7 +28,7 @@ int	ft_print_hex_small(long long hex)
 	return (printlen);
 }
 
-void	put_hex_small(long long hex)
+void	put_hex_small(unsigned int hex)
 {
 	if (hex >= 16)
 	{
@@ -37,7 +37,7 @@ void	put_hex_small(long long hex)
 	}
 	else
 	{
-		if (hex <= 10)
+		if (hex <= 9)
 			hex += '0';
 		else
 			hex = hex - 10 + 'a';
@@ -45,7 +45,7 @@ void	put_hex_small(long long hex)
 	}
 }
 
-int	ft_print_hex_big(long long hex)
+int	ft_print_hex_big(unsigned int hex)
 {
 	int	printlen;
 
@@ -55,7 +55,7 @@ int	ft_print_hex_big(long long hex)
 	return (printlen);
 }
 
-void	put_hex_big(long long hex)
+void	put_hex_big(unsigned int hex)
 {
 	if (hex >= 16)
 	{
@@ -64,7 +64,7 @@ void	put_hex_big(long long hex)
 	}
 	else
 	{
-		if (hex <= 10)
+		if (hex <= 9)
 			hex += '0';
 		else
 			hex = hex - 10 + 'A';
@@ -72,7 +72,7 @@ void	put_hex_big(long long hex)
 	}
 }
 
-int	calc_hex_printlen(long long hex)
+int	calc_hex_printlen(unsigned int hex)
 {
 	int	printlen;
 
@@ -83,11 +83,6 @@ int	calc_hex_printlen(long long hex)
 	{
 		hex = hex / 16;
 		printlen++;
-		if (hex < 0)
-		{
-			printlen++;
-			hex = hex * -1;
-		}
 	}
 	return (printlen);
 }

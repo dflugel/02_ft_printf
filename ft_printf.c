@@ -6,7 +6,7 @@
 /*   By: dflugel <dflugel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 13:45:46 by madwingg          #+#    #+#             */
-/*   Updated: 2024/03/14 18:45:19 by dflugel          ###   ########.fr       */
+/*   Updated: 2024/03/18 22:45:32 by dflugel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	ft_printf_callargs(va_list arg, char spec_flag)
 	else if (spec_flag == 'd' || spec_flag == 'i')
 		return (ft_print_nbrs(va_arg(arg, long)));
 	else if (spec_flag == 'u')
-		return (ft_print_nbrs(va_arg(arg, unsigned int)));
+		return (u_ft_print_nbrs(va_arg(arg, unsigned int)));
 	else if (spec_flag == 'x')
 		return (ft_print_hex_small(va_arg(arg, long)));
 	else if (spec_flag == 'X')
