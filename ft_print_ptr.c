@@ -6,7 +6,7 @@
 /*   By: dflugel <dflugel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 13:45:57 by madwingg          #+#    #+#             */
-/*   Updated: 2024/03/15 15:22:52 by dflugel          ###   ########.fr       */
+/*   Updated: 2024/03/19 16:27:41 by dflugel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	ft_print_ptr(unsigned long long ptr)
 
 	if (ptr == 0)
 	{
-		write(1, "(nil)", 5);
-		return (5);
+		write(1, "0x0", 3);
+		return (3);
 	}
 	write(1, "0x", 2);
 	ft_put_ptr(ptr);
