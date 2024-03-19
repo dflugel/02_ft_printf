@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dflugel <dflugel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/26 13:45:46 by madwingg          #+#    #+#             */
-/*   Updated: 2024/03/18 22:45:32 by dflugel          ###   ########.fr       */
+/*   Created: 2024/03/19 17:24:02 by dflugel           #+#    #+#             */
+/*   Updated: 2024/03/19 17:24:04 by dflugel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,14 @@ int	ft_printf(const char *str, ...)
 		if (*(str + readlen) == '%')
 		{
 			printlen += ft_printf_callargs(args, *(str + readlen + 1));
-			readlen += 2;
+			readlen ++;
 		}
 		else
 		{
-			ft_putchar_fd(*(str + readlen), 1);
+			write(1, (str + readlen), 1);
 			printlen++;
-			readlen++;
 		}
+		readlen++;
 	}
 	va_end(args);
 	return (printlen);
