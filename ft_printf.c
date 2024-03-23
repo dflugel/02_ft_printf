@@ -50,9 +50,9 @@ int	ft_printf_callargs(va_list arg, char spec_flag)
 	else if (spec_flag == 'p')
 		return (ft_print_ptr(va_arg(arg, long long)));
 	else if (spec_flag == 'd' || spec_flag == 'i')
-		return (ft_print_nbrs(va_arg(arg, long)));
+		return (ft_print_nbrs(va_arg(arg, long), spec_flag));
 	else if (spec_flag == 'u')
-		return (u_ft_print_nbrs(va_arg(arg, unsigned int)));
+		return (ft_print_nbrs(va_arg(arg, unsigned int), spec_flag));
 	else if (spec_flag == 'x')
 		return (ft_print_hex_small(va_arg(arg, long)));
 	else if (spec_flag == 'X')

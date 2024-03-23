@@ -6,14 +6,12 @@ MANDO =	ft_printf.c \
 		ft_print_chrs.c \
 		ft_print_ptr.c
 
-INCDIRS =-I.
-
 # Rules:
 NAME = libftprintf.a
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror $(INCDIRS)
+CFLAGS = -Wall -Wextra -Werror
 
 MANDOOBJ	= $(MANDO:.c=.o)
 
@@ -28,10 +26,7 @@ $(NAME): $(MANDOOBJ)
 %.o:%.c
 	$(CC) -c $(CFLAGS) $^ -o $@
 
-#testcompile: test.c
-#	$(CC) $(CFLAGS) -o test.o test.c $(NAME)
-
-test: $(NAME) #testcompile
+test: $(NAME)
 	$(CC) $(CFLAGS) -o test.o test.c $(NAME)
 
 clean:
@@ -44,3 +39,5 @@ fclean: clean libftclean
 	rm -f $(NAME)
 
 re: fclean all
+
+.PHONY: all test clean libftclean fclean re

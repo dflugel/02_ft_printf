@@ -12,19 +12,25 @@
 
 #include "ft_printf.h"
 
-int		ft_print_nbrs(long nbr);
+int		ft_print_nbrs(long nbr, char spec_flag);
 int		nbrlen(int nbr);
-int		u_ft_print_nbrs(long nbr);
-void	u_ft_putnbr_fd(long n, int fd);
+void	ft_putnbr_fd_error(int n, int fd);
+void	u_ft_putnbr_fd_error(long n, int fd);
 int		u_nbrlen(long nbr);
 
-int	ft_print_nbrs(long nbr)
+int	ft_print_nbrs(long nbr, char spec_flag)
 {
 	int	printlen;
 
-	ft_putnbr_fd(nbr, 1);
+	if (spec_flag == 'd' || spec_flag == 'i')
+		ft_putnbr_fd_error(nbr, 1);
+	else if (spec_flag == 'u')
+		u_ft_putnbr_fd_error(nbr, 1);
 	printlen = 0;
-	printlen = nbrlen(nbr);
+	if (spec_flag == 'd' || spec_flag == 'i')
+		printlen = nbrlen(nbr);
+	else if (spec_flag == 'u')
+		printlen = u_nbrlen(nbr);
 	return (printlen);
 }
 
@@ -50,17 +56,30 @@ int	nbrlen(int nbr)
 	return (printlen);
 }
 
-int	u_ft_print_nbrs(long nbr)
+void	ft_putnbr_fd_error(int n, int fd)
 {
-	int	printlen;
+	char	digit;
 
-	u_ft_putnbr_fd(nbr, 1);
-	printlen = 0;
-	printlen = u_nbrlen(nbr);
-	return (printlen);
+	if (n == -2147483648)
+	{
+		ft_putstr_fd_error("-2147483648", fd);
+		return ;
+	}
+	else if (n < 0)
+	{
+		ft_putchar_fd_error('-', fd);
+		n = n * -1;
+	}
+	digit = n % 10 + 48;
+	n = n / 10;
+	if (n != 0)
+	{
+		ft_putnbr_fd_error(n, fd);
+	}
+	ft_putchar_fd_error(digit, fd);
 }
 
-void	u_ft_putnbr_fd(long n, int fd)
+void	u_ft_putnbr_fd_error(long n, int fd)
 {
 	char	digit;
 
@@ -68,9 +87,9 @@ void	u_ft_putnbr_fd(long n, int fd)
 	n = n / 10;
 	if (n != 0)
 	{
-		u_ft_putnbr_fd(n, fd);
+		u_ft_putnbr_fd_error(n, fd);
 	}
-	ft_putchar_fd(digit, fd);
+	ft_putchar_fd_error(digit, fd);
 }
 
 int	u_nbrlen(long nbr)

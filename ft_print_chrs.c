@@ -14,12 +14,13 @@
 
 int		ft_print_char(int c);
 int		ft_print_str(char *str);
-void	ft_putchar_fd(char c, int fd);
-void	ft_putstr_fd(char *s, int fd);
+void	ft_putchar_fd_error(char c, int fd);
+void	ft_putstr_fd_error(char *s, int fd);
+int		get_error(int write_result);
 
 int	ft_print_char(int c)
 {
-	ft_putchar_fd(c, 1);
+	ft_putchar_fd_error(c, 1);
 	return (1);
 }
 
@@ -27,28 +28,32 @@ int	ft_print_str(char *str)
 {
 	if (!str)
 	{
-		write(1, "(null)", 6);
+		ft_putstr_fd_error("(null)", 1);
 		return (6);
 	}
-	ft_putstr_fd(str, 1);
+	ft_putstr_fd_error(str, 1);
 	return (ft_strlen(str));
 }
 
-
 void	ft_putchar_fd_error(char c, int fd)
 {
-	if(error_status == 0)
-	{
-		
-		write(fd, &c, 1);
-	}
+	if (get_error(0) == -1)
+		return ;
+	else if (get_error(0) == 0)
+		get_error(write(fd, &c, 1));
 }
 
-void	get_error()
+int	get_error(int write_result)
 {
 	static int	error_status;
 
-	error_status = 0;
+	if (error_status == -1)
+		return (error_status);
+	else if (write_result == -1)
+		error_status = -1;
+	else
+		error_status = 0;
+	return (error_status);
 }
 
 void	ft_putstr_fd_error(char *s, int fd)
@@ -60,7 +65,7 @@ void	ft_putstr_fd_error(char *s, int fd)
 	i = 0;
 	while (i < len)
 	{
-		write(fd, (s + i), 1);
+		ft_putchar_fd_error(*(s + i), fd);
 		i++;
 	}
 }

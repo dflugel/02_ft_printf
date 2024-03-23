@@ -21,10 +21,10 @@ int	ft_print_ptr(unsigned long long ptr)
 
 	if (ptr == 0)
 	{
-		write(1, "0x0", 3);
+		ft_putstr_fd_error("0x0", 1);
 		return (3);
 	}
-	write(1, "0x", 2);
+	ft_putstr_fd_error("0x", 1);
 	ft_put_ptr(ptr);
 	printlen = 2;
 	while (ptr != 0)
@@ -48,6 +48,6 @@ void	ft_put_ptr(unsigned long long ptr)
 			ptr += '0';
 		else
 			ptr = ptr - 10 + 'a';
-		write(1, &ptr, 1);
+		ft_putchar_fd_error(ptr, 1);
 	}
 }

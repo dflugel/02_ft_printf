@@ -41,7 +41,7 @@ void	put_hex_small(unsigned int hex)
 			hex += '0';
 		else
 			hex = hex - 10 + 'a';
-		write(1, &hex, 1);
+		ft_putchar_fd_error(hex, 1);
 	}
 }
 
@@ -68,7 +68,7 @@ void	put_hex_big(unsigned int hex)
 			hex += '0';
 		else
 			hex = hex - 10 + 'A';
-		write(1, &hex, 1);
+		ft_putchar_fd_error(hex, 1);
 	}
 }
 

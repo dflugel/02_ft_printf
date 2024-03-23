@@ -10,23 +10,31 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
-#include "libft/libft.h"
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
+# include <stdarg.h>
+# include "libft/libft.h"
 
 // Prototypes
 
-int	ft_printf(const char *str, ...);
+int		ft_printf(const char *str, ...);
 
-int	ft_print_char(int c);
+int		ft_print_char(int c);
 
-int	ft_print_str(char *str);
+void	ft_putchar_fd_error(char c, int fd);
 
-int	ft_print_ptr(unsigned long long ptr);
+void	ft_putstr_fd_error(char *s, int fd);
 
-int	ft_print_nbrs(long nbr);
+int		get_error(int write_result);
 
-int	u_ft_print_nbrs(long nbr);
+int		ft_print_str(char *str);
 
-int	ft_print_hex_small(unsigned int hex);
+int		ft_print_ptr(unsigned long long ptr);
 
-int	ft_print_hex_big(unsigned int hex);
+int		ft_print_nbrs(long nbr, char spec_flag);
+
+int		ft_print_hex_small(unsigned int hex);
+
+int		ft_print_hex_big(unsigned int hex);
+
+#endif
