@@ -6,7 +6,7 @@
 /*   By: dflugel <dflugel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 17:24:02 by dflugel           #+#    #+#             */
-/*   Updated: 2024/03/23 11:49:33 by dflugel          ###   ########.fr       */
+/*   Updated: 2024/03/25 14:52:49 by dflugel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,21 @@ int	ft_printf(const char *str, ...)
 	printlen = 0;
 	if (!str)
 		return (-1);
+	get_error(1, 1);
 	while (*(str + readlen) != '\0')
 	{
 		if (*(str + readlen) == '%')
 			printlen += ft_printf_callargs(args, *(str + readlen++ + 1));
 		else
 		{
-			write(1, (str + readlen), 1);
+			ft_putchar_fd_error(*(str + readlen), 1);
 			printlen++;
 		}
 		readlen++;
 	}
 	va_end(args);
+	if (get_error(0, 0) == -1)
+		return (-1);
 	return (printlen);
 }
 

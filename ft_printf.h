@@ -6,7 +6,7 @@
 /*   By: dflugel <dflugel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 17:24:07 by dflugel           #+#    #+#             */
-/*   Updated: 2024/03/19 17:24:09 by dflugel          ###   ########.fr       */
+/*   Updated: 2024/03/25 14:51:59 by dflugel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_putchar_fd_error(char c, int fd);
 
 void	ft_putstr_fd_error(char *s, int fd);
 
-int		get_error(int write_result);
+int		get_error(int write_result, int init);
 
 int		ft_print_str(char *str);
 

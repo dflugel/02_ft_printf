@@ -6,7 +6,7 @@
 /*   By: dflugel <dflugel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 17:23:37 by dflugel           #+#    #+#             */
-/*   Updated: 2024/03/23 11:55:56 by dflugel          ###   ########.fr       */
+/*   Updated: 2024/03/25 14:53:08 by dflugel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int		ft_print_char(int c);
 int		ft_print_str(char *str);
 void	ft_putchar_fd_error(char c, int fd);
 void	ft_putstr_fd_error(char *s, int fd);
-int		get_error(int write_result);
 
 int	ft_print_char(int c)
 {
@@ -37,19 +36,19 @@ int	ft_print_str(char *str)
 
 void	ft_putchar_fd_error(char c, int fd)
 {
-	if (get_error(0) == -1)
-		return ;
-	else if (get_error(0) == 0)
-		get_error(write(fd, &c, 1));
+	if (get_error(0, 0) == 0)
+		get_error(write(fd, &c, 1), 0);
 }
 
-int	get_error(int write_result)
+int	get_error(int write_result, int init)
 {
 	static int	error_status;
 
+	if (init == 1)
+		error_status = 0;
 	if (error_status == -1)
-		return (error_status);
-	else if (write_result == -1)
+		return (-1);
+	else if (write_result < 0)
 		error_status = -1;
 	else
 		error_status = 0;
